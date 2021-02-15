@@ -1,0 +1,252 @@
+<h2 class="text-center" style="font-style: italic;">Formulario para alta de clientes</h2>
+<hr>
+<!--Formulario-->
+<form [formGroup]="formulario" (ngSubmit)="save( )">
+    <h3>Datos del contacto</h3>
+    <table class="w-100 text-center responsive">
+        <tr>
+            <td class="w-25" colspan="2">
+                <!--Firebase ID-->
+                <input type="text" formControlName="id" class="form-control text-center" placeholder="ID">
+                <small class="form-text text-muted text-center">Campo autogenerado</small>
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Nombre</label>
+                <input type="text" class="form-control" formControlName="nombre1" [class.is-invalid]="propertyNoVal('nombre1')">
+                <small *ngIf="propertyNoVal('nombre1')" class="text-danger">
+                    Debe contener al menos 3 letras
+                </small>
+            </td>
+            <td class="w-50">
+                <label>Segundo nombre</label>
+                <input type="text" class="form-control" formControlName="nombre2">
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Primer apellido</label>
+                <input type="text" class="form-control" formControlName="apellido1" [class.is-invalid]="propertyNoVal('apellido1')">
+                <small *ngIf="propertyNoVal('apellido1')" class="text-danger">
+                    Debe contener al menos 4 letras
+                </small>
+            </td>
+            <td class="w-50">
+                <label>Segundo apellido</label>
+                <input type="text" class="form-control" formControlName="apellido2">
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Teléfono</label>
+                <input type="text" class="form-control text-center" formControlName="telefono" [class.is-invalid]="propertyNoVal('telefono')">
+                <small *ngIf="propertyNoVal('telefono')" class="text-danger">
+                    Debe contener al menos 10 dígitos
+                </small>
+            </td>
+            <td class="w-50">
+                <label>Correo</label>
+                <input type="email" class="form-control" formControlName="correo" [class.is-invalid]="propertyNoVal('correo')">
+                <small *ngIf="propertyNoVal('correo')" class="text-danger">
+                    Debe ingresar un correo válido
+                </small>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Datos de dirección de contacto</h3>
+    <table class="w-100 text-center">
+        <tr>
+            <td class="w-50">
+                <label>Calle</label>
+                <input type="text" class="form-control" formControlName="calle" [class.is-invalid]="propertyNoVal('calle')">
+                <small *ngIf="propertyNoVal('calle')" class="text-danger">
+                    Debe ingresar al menos 5 letras
+                </small>
+            </td>
+            <td class="w-50">
+                <label>Número exterior</label>
+                <input type="text" class="form-control" formControlName="numExt" [class.is-invalid]="propertyNoVal('numExt')">
+                <small *ngIf="propertyNoVal('numExt')" class="text-danger">
+                    Debe ingresar al menos 1 dígito
+                </small>
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Número interior</label>
+                <input type="text" class="form-control" formControlName="numInt">
+            </td>
+            <td class="w-50">
+                <label>Código postal</label>
+                <input type="text" class="w-cp input-center form-control" formControlName="cp" #cpContact (keyup.enter)="getInfoCPDirContact(cpContact.value)" [class.is-invalid]="propertyNoVal('cp')">
+                <small *ngIf="propertyNoVal('cp')" class="text-danger">
+                    Debe ingresar al menos 5 dígitos
+                </small>
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Colonia</label>
+                <select class="custom-select form-control" formControlName="colonia" [class.is-invalid]="propertyNoVal('colonia')">
+                    <option *ngFor="let asentamiento of asentamientos" value="{{ asentamiento }}">{{ asentamiento }}</option>
+                </select>
+                <small *ngIf="propertyNoVal('colonia')" class="text-danger">
+                    Debe ingresar la colonia/asentamiento
+                </small>
+            </td>
+            <td class="w-50">
+                <label>Delegación o municipio</label>
+                <input type="text" class="form-control" formControlName="delMun" [class.is-invalid]="propertyNoVal('delMun')" value="{{ municipio }}">
+                <small *ngIf="propertyNoVal('delMun')" class="text-danger">
+                    Debe ingresar al menos 5 letras
+                </small>
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Estado</label>
+                <input type="text" class="form-control" formControlName="estado" [class.is-invalid]="propertyNoVal('estado')" value="{{ estado }}">
+                <small *ngIf="propertyNoVal('estado')" class="text-danger">
+                    Debe ingresar al menos 5 letras
+                </small>
+            </td>
+            <td class="w-50">
+                <label>País</label>
+                <input type="text" class="form-control" formControlName="pais" value="{{ pais }}" [class.is-invalid]="propertyNoVal('pais')" value="{{ pais }}">
+                <small *ngIf="propertyNoVal('pais')" class="text-danger">
+                    Debe ingresar al menos 4 letras
+                </small>
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Entre calle</label>
+                <input type="text" class="form-control" formControlName="entreCalle">
+            </td>
+            <td class="w-50">
+                <label>Y calle</label>
+                <input type="text" class="form-control" formControlName="yCalle">
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Datos de facturación</h3>
+    <table class="w-100 text-center">
+        <tr>
+            <td class="w-50">
+                <label>Persona</label>
+                <br>
+                <select class="custom-select form-control w-25" formControlName="persona">
+                    <option value="Física">Física</option>
+                    <option value="Moral">Moral</option>
+                </select>
+            </td>
+            <td class="w-50">
+                <label>Uso de CFDI</label>
+                <select class="custom-select form-control" formControlName="usoCFDI">
+                    <option *ngFor="let uso of catalgoCFDI" value="{{ uso.cfdi_code }}">{{ uso.cfdi_code }} - {{ uso.descripcion }}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Razón social</label>
+                <input type="text" class="form-control" formControlName="razonSocial">
+            </td>
+            <td class="w-50">
+                <label>Correo de facturación</label>
+                <input type="email" class="form-control" formControlName="correoFact">
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>RFC</label>
+                <input class="form-control" type="text" formControlName="rfc">
+            </td>
+            <td class="w-50">
+                <label>¿La dirección de correo de facturación es igual a la de contacto?</label>
+                <select class="custom-select form-control w-25" formControlName="dirCorreoIgualContacto">
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Datos de dirección de facturación (opcional)</h3>
+    <table class="w-100 text-center">
+        <tr>
+            <td class="w-50">
+                <label>Calle</label>
+                <input type="text" class="form-control" formControlName="calleFact">
+            </td>
+            <td class="w-50">
+                <label>Número exterior</label>
+                <input type="text" class="form-control" formControlName="numExtFact">
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Número interior</label>
+                <input type="text" class="form-control" formControlName="numIntFact">
+            </td>
+            <td class="w-50">
+                <label>Código postal</label>
+                <input type="text" maxlength="5" class="w-cp input-center form-control" #cpFact formControlName="cpFact" (keyup.enter)="getInfoCPDirFact(cpFact.value)">
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Colonia</label>
+                <select class="custom-select form-control" formControlName="coloniaFact">
+                    <option *ngFor="let asentFact of asentamientosFact" value="{{ asentFact }}">{{ asentFact }}</option>
+                </select>
+            </td>
+            <td class="w-50">
+                <label>Delegación o municipio</label>
+                <input type="text" class="form-control" formControlName="delMunFact">
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Estado</label>
+                <input type="text" class="form-control" formControlName="estadoFact">
+            </td>
+            <td class="w-50">
+                <label>País</label>
+                <input type="text" class="form-control" formControlName="paisFact">
+            </td>
+        </tr>
+        <tr>
+            <td class="w-50">
+                <label>Entre calle</label>
+                <input type="text" class="form-control" formControlName="entreCalleFact">
+            </td>
+            <td class="w-50">
+                <label>Y calle</label>
+                <input type="text" class="form-control" formControlName="yCalleFact">
+            </td>
+        </tr>
+    </table>
+</form>
+<hr>
+<!--Botones-->
+<div class="form-group row animated fadeIn fast" style="display: flex; justify-content: center;">
+    <!--Guardar-->
+    <div class="col text-center w-50">
+        <button class="btn btn-outline-primary w-75" (click)="save()">
+                <i class="fa fa-save"></i>
+                Guardar
+        </button>
+    </div>
+    <!--Cancelar-->
+    <div class="col text-center w-50">
+        <button class="btn btn-outline-danger w-75" (click)="cancelSave()">
+                <i class="fa fa-ban"></i>
+                Cancelar
+        </button>
+    </div>
+</div>
+<br>

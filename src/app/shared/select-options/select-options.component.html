@@ -1,0 +1,214 @@
+<div class="shadow container">
+    <div class="row w-100">
+        <!--Botones para navegación entre parámetros de selección-->
+        <div class="col text-center">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                    <input (click)="showIncInd()" type="radio" name="options" id="option1" checked><small>Incluir valores individuales({{ incValIndArraySO.length }})</small>
+                </label>
+                <label class="btn btn-primary">
+                    <input (click)="showIncRan()" type="radio" name="options" id="option2"><small>Incluir rangos({{ incValRanArraySO.length }})</small>
+                </label>
+                <label class="btn btn-primary">
+                    <input (click)="showExcInd()" type="radio" name="options" id="option3"><small>Excluir valores ind.({{ excValIndArraySO.length }})</small>
+                </label>
+                <label class="btn btn-primary">
+                    <input (click)="showExcRan()" type="radio" name="options" id="option3"><small>Excluir rangos({{ excValRanArraySO.length }})</small>
+                </label>
+            </div>
+        </div>
+    </div>
+    <!--Formulario-->
+    <div class="row w-100">
+        <div class="col" style="text-align: center;">
+            <form autocomplete="off" [formGroup]="form" (ngSubmit)="saveParams( )">
+                <!--Parámetros para incluir valores individuales-->
+                <table class=" table-responsive text-center w-75" style="margin: auto;" *ngIf="showTableIncInd">
+                    <thead>
+                        <tr>
+                            <th scope="col ">Opción</th>
+                            <th scope="col ">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="incValInd">
+                        <tr *ngFor="let IVI of incValIndArraySO.controls; let iA = index" [formGroupName]="iA">
+                            <!--Valores individuales-->
+                            <td>
+                                <select class="custom-select form-control" formControlName="option">
+                                    <option *ngFor="let value of ValuesForInd" value="{{ value.sign }}">{{ value.sign }}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text " class="form-control" formControlName="low">
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-danger" (click)="deleteRow( 'A', iA )">
+                                    <i class="fa fa-minus-circle"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Parámetros para incluir rangos-->
+                <table class=" table-responsive text-center w-75 " style="margin: auto;" *ngIf="showTableIncRan">
+                    <thead>
+                        <tr>
+                            <th scope="col ">Opción</th>
+                            <th scope="col ">Límite inferior</th>
+                            <th scope="col ">Límite superior</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="incValRan">
+                        <tr *ngFor="let IVR of incValRanArraySO.controls; let iB = index" [formGroupName]="iB">
+                            <!--Valores range-->
+                            <td>
+                                <select class="custom-select form-control " formControlName="option">
+                                    <option *ngFor="let valueRange of ValuesForRange " value="{{ valueRange.sign }}">{{ valueRange.sign }}</option>
+                                </select>
+                            </td>
+                            <!--Low-->
+                            <td>
+                                <input class="form-control" type="text" formControlName="low">
+                            </td>
+                            <!--High-->
+                            <td>
+                                <input class="form-control" type="text" formControlName="high">
+                            </td>
+                            <!--Eliminar-->
+                            <td>
+                                <button class="btn btn-outline-danger" (click)="deleteRow( 'B', iB )">
+                                    <i class="fa fa-minus-circle"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Parámetros para excluir valores individuales-->
+                <table class=" table-responsive text-center w-75 " style="margin: auto;" *ngIf="showTableExcInd">
+                    <thead>
+                        <tr>
+                            <th scope="col ">Opción</th>
+                            <th scope="col ">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="excValInd">
+                        <tr *ngFor="let EVI of excValIndArraySO.controls; let iC = index" [formGroupName]="iC">
+                            <!--Valores individuales-->
+                            <td>
+                                <select class="custom-select form-control" formControlName="option">
+                                    <option *ngFor="let value of ValuesForInd " value="{{ value.sign }}">{{ value.sign }}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="low">
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-danger" (click)="deleteRow( 'C', iC )">
+                                    <i class="fa fa-minus-circle"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Parámetros para excluir rangos-->
+                <table class="table-responsive text-center w-75" style="margin: auto;" *ngIf="showTableExcRan">
+                    <thead>
+                        <tr>
+                            <th scope="col ">Opción</th>
+                            <th scope="col ">Límite inferior</th>
+                            <th scope="col ">Límite superior</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="excValRan">
+                        <tr *ngFor="let EVR of excValRanArraySO.controls; let iD = index" [formGroupName]="iD">
+                            <!--Valores range-->
+                            <td>
+                                <select class="custom-select form-control " formControlName="option">
+                                    <option *ngFor="let valueRange of ValuesForRange " value="{{ valueRange.sign }}">{{ valueRange.sign }}</option>
+                                </select>
+                            </td>
+                            <!--Low-->
+                            <td>
+                                <input class="form-control" type="text" formControlName="low">
+                            </td>
+                            <!--High-->
+                            <td>
+                                <input class="form-control" type="text" formControlName="high">
+                            </td>
+                            <!--Eliminar-->
+                            <td>
+                                <button class="btn btn-outline-danger" (click)="deleteRow( 'D', iD )">
+                                    <i class="fa fa-minus-circle"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <!--Botones de operación-->
+    <div class="row w-100">
+        <div class="col w-50 text-right">
+            <button class="btn btn-outline-success" (click)="saveParams()">
+                <i class="fa fa-clock"> Tomar</i>
+            </button>
+            <!--Incluir valor(es) individual(es)-->
+            <button class="btn btn-outline-primary" (click)="addNewRow( 'A' )" *ngIf="showTableIncInd">
+                <i class="fa fa-plus"> Agregar</i>
+            </button>
+            <!--Incluir intervalos-->
+            <button class="btn btn-outline-primary" (click)="addNewRow( 'B' )" *ngIf="showTableIncRan">
+                <i class="fa fa-plus"> Agregar</i>
+            </button>
+            <!--Excluir valores individuales-->
+            <button class="btn btn-outline-primary" (click)="addNewRow( 'C' )" *ngIf="showTableExcInd">
+                <i class="fa fa-plus"> Agregar</i>
+            </button>
+            <!--Excluir rangos-->
+            <button class="btn btn-outline-primary" (click)="addNewRow( 'D' )" *ngIf="showTableExcRan">
+                <i class="fa fa-plus"> Agregar</i>
+            </button>
+            <button class="btn btn-outline-danger" (click)="clearParams()">
+                <i class="fa fa-trash"> Limpiar</i>
+            </button>
+            <button class="btn btn-outline-info" (click)="back()">
+                <i class="fa fa-arrow-circle-left"> Volver</i>
+            </button>
+        </div>
+    </div>
+    <br>
+</div>
+<br>
+<!--Mostrar json del form-->
+<!--
+<div class="row w-100">
+    <div class="col">
+        <h4>Seleccionar valores individuales</h4>
+        <pre>
+            {{ incValIndArraySO.value | json }}
+        </pre>
+    </div>
+    <div class="col">
+        <h4>Seleccionar rangos</h4>
+        <pre>
+            {{ incValRanArraySO.value | json }}
+        </pre>
+    </div>
+</div>
+<div class="row w-100">
+    <div class="col">
+        <h4>Excluir valores individuales</h4>
+        <pre>
+            {{ excValIndArraySO.value | json }}
+        </pre>
+    </div>
+    <div class="col">
+        <h4>Excluir rangos</h4>
+        <pre>
+            {{ excValRanArraySO.value | json }}
+        </pre>
+    </div>
+</div>
+-->

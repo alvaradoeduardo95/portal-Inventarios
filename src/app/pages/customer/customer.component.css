@@ -1,0 +1,10 @@
+.w-cp {
+    width: 25%;
+    text-align: center;
+}
+
+.input-center {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}

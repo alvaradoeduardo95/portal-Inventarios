@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.wj-cells .wj-cell:focus {
+  background: rgba(97, 89, 80, 0.75) !important;  
+}
+.wj-flexgrid .wj-marquee,
+.wj-flexgrid .wj-header {
+  transition: all .4s;
+  
+}
+
+.wj-flexgrid {
+  max-height: 250px;
+  margin-bottom: 24px;
+}

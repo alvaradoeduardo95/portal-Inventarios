@@ -1,0 +1,84 @@
+<h4 class="text-left">Clientes</h4>
+<hr>
+<div class="row w-100" *ngIf="clientes.length > 0">
+    <div class="col text-right">
+    
+        <button mat-fab style="background-color: dodgerblue;" (click)="editCustomer()">
+            <i class="fa fa-edit"></i>
+        </button>
+        <button mat-fab style="background-color: darkgreen;" (click)="setFlagBloq('U', 'Desbloquear')">
+            <i class="fa fa-unlock"></i>
+        </button>
+        <button mat-fab style="background-color: lightsalmon;"  (click)="setFlagBloq('L', 'Bloquear')">
+            <i class="fa fa-lock"></i>
+        </button>
+        <button mat-fab style="background-color: red;" (click)="deleteCustomers()">
+            <i class="fa fa-trash"></i>
+        </button>
+        <button mat-fab style="background-color: lightskyblue;" (click)="searchCustomers()">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+</div>
+<hr />
+<!--CONTAINER Y DIV PARA WIJMO-->
+<div class="container-fluid">
+    <label>
+     <!--Header Column-->
+        <input #headersCheckbox type="checkbox" 
+        [checked]="headers" style='display:none'
+        />
+    </label>
+    <!-- search box -->
+    <wj-flex-grid-search style='float:right;' [placeholder]="'Buscar'" [grid]="theGrid"> cssMatch="">
+    </wj-flex-grid-search>
+    
+    <p style='float:left;'>
+        There are now <b>{{selectedItems.length}}</b> items selected.
+        </p>
+    <wj-flex-grid #theGrid 
+        [itemsSource]="data" 
+        [allowAddNew]="false" 
+        [allowDelete]='false'
+        [selectionMode]="'MultiRange'"
+        [showMarquee]="true"
+        (initialized)="initGrid(theGrid)">
+        <!--COLUMNAS -->
+        <wj-flex-grid-column [header]="'No'" [binding]="'No'" width="2*"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'IDF'" [binding]="'id'" width="2*"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Bloqueado'" [binding]="'flag'" width="2*"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'RFC'" [binding]="'RFC'" width="2*"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Razon Social'" [binding]="'RazonSocial'" width="2*"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Persona'" [binding]="'Persona'" width="2*"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Nombre'" [binding]="'Nombre'" width="2*"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Telefono'" [binding]="'Telefono'" width="2*"></wj-flex-grid-column>
+        <!--
+        <wj-flex-grid-column
+            binding="rating"
+            header="Rating"
+            align="center"
+            [width]="220"
+            [cellTemplate]="tplRating">
+        </wj-flex-grid-column>
+        -->
+        <wj-flex-grid-filter></wj-flex-grid-filter>
+        <!--
+         <wj-flex-grid-column header="Update" [isReadOnly]="true"></wj-flex-grid-column>
+         -->
+    </wj-flex-grid>
+
+    <wj-popup #thePopup>
+        <div class="wj-dialog-header">
+            Deleting Row
+        </div>
+        <div class="wj-dialog-body" tabindex="-1">
+            Deseas eliminar registro seleccionado?
+        </div>
+        <div class="wj-dialog-footer">
+            <button class="btn btn-primary wj-hide-ok">Aceptar</button>
+            <button class="btn btn-default wj-hide">Cancelar</button>
+        </div>
+    </wj-popup>
+    <!--
+    <button (click)='mostrarData()' >DATA</button>-->
+</div>

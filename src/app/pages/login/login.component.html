@@ -1,0 +1,15 @@
+<br>
+<div class="row">
+    <img src="../../../assets/eternec/Logos eternec/Logotipo.png" class="rounded mx-auto d-block" alt="..." style="max-height: 100px;">
+</div>
+<div class="row animated fadeInLeft fast" style="display: flex; justify-content: center;">
+    <form (ngSubmit)="login( f )" #f="ngForm" class="w-75" style="max-width: 400px;">
+        <label>Correo</label>
+        <input class="form-control" [(ngModel)]="user.email" name="user" required type="email" email aria-describedby="emailHelp" placeholder="Ingrese correo electrónico">
+        <label>Contraseña</label>
+        <input class="form-control" [(ngModel)]="user.password" name="password" required type="password">
+        <hr>
+        <button type="submit" class="btn btn-outline-primary w-100">Ingresar</button>
+    </form>
+</div>
+<br>

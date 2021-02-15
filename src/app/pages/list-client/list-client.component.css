@@ -1,0 +1,18 @@
+.wj-flexgrid .wj-cell {
+    transition: background .4s;
+    background-color: rgb(228, 23, 23);
+  }
+  .wj-flexgrid .wj-marquee,
+  .wj-flexgrid .wj-header {
+    transition: all .4s;
+  }
+  
+  .wj-flexgrid {
+    max-height: 250px;
+    margin-bottom: 24px;
+}
+.cell-rating {
+  font-size: 12px;
+}
+  
+  

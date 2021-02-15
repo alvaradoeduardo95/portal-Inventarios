@@ -1,0 +1,207 @@
+<!--Parámetros para búsqueda-->
+<h3 class="text-center">Parámetros de selección</h3>
+<hr>
+<div class="row justify-content-center">
+    <small>
+        <form [formGroup]="formulario">
+            <table class="table table-responsive w-100">
+                <tr>
+                    <td>ID</td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="idLow" #idLow />
+                    </td>
+                    <td>
+                        A
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="idHigh" #idHigh />
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary" (click)="showSO(id, idLow.value, idHigh.value)">
+                            <i class="fa fa-arrow-circle-right">
+                            </i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Razón social</td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="razonSocialLow" #razonSocialLow/>
+                    </td>
+                    <td>
+                        A
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="razonSocialHigh" #razonSocialHigh/>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary" (click)="showSO(id, razonSocialLow.value, razonSocialHigh.value )">
+                            <i class="fa fa-arrow-circle-right">
+                            </i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>RFC</td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="rfcLow" #rfcLow/>
+                    </td>
+                    <td>
+                        A
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="rfcHigh" #rfcHigh/>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary" (click)="showSO(id, rfcLow.value, rfcHigh.value)">
+                            <i class="fa fa-arrow-circle-right">
+                            </i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nombre</td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="nombre1Low" #nombre1Low/>
+                    </td>
+                    <td>
+                        A
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="nombre1High" #nombre1High/>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary" (click)="showSO(nombre1, nombre1Low.value, nombre1High.value)">
+                            <i class="fa fa-arrow-circle-right">
+                            </i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Segundo nombre</td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="nombre2Low" #nombre2Low/>
+                    </td>
+                    <td>
+                        A
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="nombre2High" #nombre2High/>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary" (click)="showSO(nombre2, nombre2Low.value, nombre2High.value)">
+                            <i class="fa fa-arrow-circle-right">
+                            </i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Apellido</td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="appLow" #appLow/>
+                    </td>
+                    <td>
+                        A
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="appHigh" #appHigh/>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary" (click)="showSO(apellidoP, appLow.value, appHigh.value)">
+                            <i class="fa fa-arrow-circle-right">
+                            </i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Segundo apellido</td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="apmLow" #apmLow/>
+                    </td>
+                    <td>
+                        A
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="apmHigh" #apmHigh/>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary" (click)="showSO(apellidoM, apmLow.value, apmHigh.value)">
+                            <i class="fa fa-arrow-circle-right">
+                            </i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Teléfono</td>
+                    <td>
+                        <input type="tel" class="form-control" formControlName="telefonoLow" #telefonoLow/>
+                    </td>
+                    <td>
+                        A
+                    </td>
+                    <td>
+                        <input type="tel" class="form-control" formControlName="telefonoHigh" #telefonoHigh/>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary" (click)="showSO(telefono, telefonoLow.value, telefonoHigh.value)">
+                            <i class="fa fa-arrow-circle-right">
+                            </i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Correo</td>
+                    <td>
+                        <input type="email" class="form-control" formControlName="correoLow" #correoLow/>
+                    </td>
+                    <td>
+                        A
+                    </td>
+                    <td>
+                        <input type="email" class="form-control" formControlName="correoHigh" #correoHigh/>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary" (click)="showSO(correo, correoLow.value, correoHigh.value)">
+                            <i class="fa fa-arrow-circle-right">
+                            </i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Persona</td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineRadio1"
+                                value="fisica" formControlName="persona" />
+                            <label class="form-check-label" for="inlineRadio1">Física</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineRadio2"
+                                value="moral" formControlName="persona" />
+                            <label class="form-check-label" for="inlineRadio2">Moral</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="text-center">
+                    <td class="text-center" colspan="2">
+                        <!--Buscar-->
+                        <button class="btn btn-info mr-1 w-100" (click)="search()">
+                            <i class="fa fa-search"></i>
+                            Buscar
+                        </button>
+                    </td>
+                    <td class="text-center" colspan="2">
+                        <!--Limpiar parámetros-->
+                        <button class="btn btn-danger mr-1 w-100" (click)="clearParams()">
+                            <i class="fa fa-eraser"></i>
+                            Limpiar parámetros
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </small>
+</div>
+<br>

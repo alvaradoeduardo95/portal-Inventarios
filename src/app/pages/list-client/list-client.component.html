@@ -1,0 +1,188 @@
+<!--
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Current Item</h4>
+            <dl class="dl-horizontal">
+                <dt>ID</dt>
+                <dd>
+                    <input type="text" class="form-control" [ngModel]="cv.currentItem?.id"
+                        (ngModelChange)="cv.currentItem.id=$event" [disabled]="!isEditing()" />
+                </dd>
+                <dt>Country</dt>
+                <dd>
+                    <input type="text" class="form-control" [ngModel]="cv.currentItem?.country"
+                        (ngModelChange)="cv.currentItem.country=$event" [disabled]="!isEditing()" />
+                </dd>
+                <dt>Color</dt>
+                <dd>
+                    <input type="text" class="form-control" [ngModel]="cv.currentItem?.color"
+                        (ngModelChange)="cv.currentItem.color=$event" [disabled]="!isEditing()" />
+                </dd>
+                <dt>Amount</dt>
+                <dd>
+                    <input type="number" class="form-control" [ngModel]="cv.currentItem?.amount"
+                        (ngModelChange)="cv.currentItem.amount=$event" [disabled]="!isEditing()" />
+                </dd>
+                <dt></dt>
+                <dd> 
+                    <div class="btn-group data-btn-group">
+                        <button (click)="edit()" [ngStyle]="{display: !isEditing() ? '' : 'none'}"
+                            class="btn btn-default btn-sm">Edit</button>
+                        <button (click)="add()" [ngStyle]="{display: !isEditing() ? '' : 'none'}"
+                            class="btn btn-default btn-sm">Add</button>
+                        <button (click)="delete()" [ngStyle]="{display: !isEditing() ? '' : 'none'}"
+                            class="btn btn-default btn-sm">Delete</button>
+                        <button (click)="commit()" [ngStyle]="{display: isEditing() ? '' : 'none'}"
+                            class="btn btn-default btn-sm">Commit</button>
+                        <button (click)="cancel()" [ngStyle]="{display: isEditing() ? '' : 'none'}"
+                            class="btn btn-default btn-sm">Cancel</button>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <h4>Navigation</h4>
+            <dl>
+                <dt>items</dt>
+                <dd>
+                    <wj-collection-view-navigator [cv]="cv"></wj-collection-view-navigator>
+                </dd>
+                <dt>pages</dt>
+                <dd>
+                    <wj-collection-view-pager [cv]="cv"></wj-collection-view-pager>
+                </dd>
+            </dl>
+            <wj-menu [(value)]="cv.pageSize" [header]="'Page Size'">
+                <wj-menu-item [value]="0">No Paging</wj-menu-item>
+                <wj-menu-item [value]="10">10</wj-menu-item>
+            </wj-menu>
+        </div>
+    
+    </div>
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr class="active">
+                <th class="text-center">
+                    <div class="btn-group">
+                        <wj-menu [(value)]="filter.no" [header]="'No'" (itemClicked)="doFilter()" style="display:block">
+                            <wj-menu-item [value]="''">(All)</wj-menu-item>
+                            <wj-menu-item [value]="'odd'">Odd</wj-menu-item>
+                            <wj-menu-item [value]="'even'">Even</wj-menu-item>
+                        </wj-menu>
+                        <button class="btn btn-default" (click)="toggleSort('id')">{{getSort('id')}}</button>
+                    </div>
+                </th>
+                <th class="text-center">
+                    <div class="btn-group">
+                        <wj-menu [(value)]="filter.rfc" [header]="'RFC'" (itemClicked)="doFilter()"
+                            style="display:block">
+                            <wj-menu-item [value]="''">(All)</wj-menu-item>
+                        </wj-menu>
+                        <button class="btn btn-default" (click)="toggleSort('rfc')">{{getSort('rfc')}}</button>
+                        <button class="btn btn-default"
+                            (click)="toggleGroup('rfc')">{{getGroup('rfc')}}</button>
+                    </div>
+                </th>
+                <th class="text-center">
+                    <div class="btn-group">
+                        <wj-menu [(value)]="filter.razon" [header]="'Razon Social'" (itemClicked)="doFilter()"
+                            style="display:block">
+                            <wj-menu-item [value]="''">(All)</wj-menu-item>
+                            <wj-menu-item [value]="'Black'">Black</wj-menu-item>
+                            <wj-menu-item [value]="'White'">White</wj-menu-item>
+                        </wj-menu>
+                        <button class="btn btn-default" (click)="toggleSort('razon')">{{getSort('razon')}}</button>
+                        <button class="btn btn-default" (click)="toggleGroup('razon')">{{getGroup('razon')}}</button>
+                    </div>
+                </th>
+                <th class="text-center">
+                    <div class="btn-group">
+                        <wj-menu [(value)]="filter.minAmount" [header]="'Amount'" (itemClicked)="doFilter()"
+                            style="display:block">
+                            <wj-menu-item [value]="''">(All)</wj-menu-item>
+                            <wj-menu-item [value]="0">&gt; 0</wj-menu-item>
+                            <wj-menu-item [value]="0">&gt; 0</wj-menu-item>
+                        </wj-menu>
+                        <button class="btn btn-default" (click)="toggleSort('amount')">{{getSort('amount')}}</button>
+                        <button class="btn btn-default" (click)="toggleGroup('amount')">{{getGroup('amount')}}</button>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of groupedList" [ngClass]="{success: item == cv.currentItem}"
+                (click)="moveCurrentTo(item)">-->
+
+                <!-- group row 
+                <td [ngStyle]="{display:isGroup(item)?'':'none'}" colspan="4" class="active">
+                    <span [ngStyle]="{display:'inline-block', width: (item.level * 25) + 'px'}"></span>
+                    <b>{{item.name}}</b> ({{item.items?.length}} items)
+                </td>
+
+                <!-- data row 
+                <td [ngStyle]="{display:isGroup(item)?'none':''}" class="text-center">{{item.id}}</td>
+                <td [ngStyle]="{display:isGroup(item)?'none':''}" class="text-center">{{item.country}}</td>
+                <td [ngStyle]="{display:isGroup(item)?'none':''}" class="text-center">{{item.color}}</td>
+                <td [ngStyle]="{display:isGroup(item)?'none':''}" class="text-center">{{item.amount | number:'1.2-2'}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+-->
+
+<div class="container-fluid">
+
+<label>
+     <!--Header Column-->
+    <input #headersCheckbox type="checkbox" 
+    [checked]="headers" 
+    />
+</label>
+<p>
+    There are now <b>{{selectedItems.length}}</b> items selected.
+</p>
+
+<wj-flex-grid #theGrid 
+    [itemsSource]="data" 
+    [allowAddNew]="true" 
+    [allowDelete]='true'
+    [selectionMode]="'MultiRange'"
+    [showMarquee]="true"
+    (initialized)="initGrid(theGrid)">
+    <!--COLUMNAS -->
+    <wj-flex-grid-column [header]="'No'" [binding]="'No'" width="2*"></wj-flex-grid-column>
+    <wj-flex-grid-column [header]="'IDF'" [binding]="'id'" width="2*"></wj-flex-grid-column>
+    <wj-flex-grid-column [header]="'RFC'" [binding]="'RFC'" width="2*"></wj-flex-grid-column>
+    <wj-flex-grid-column [header]="'Razon Social'" [binding]="'RazonSocial'" width="2*"></wj-flex-grid-column>
+    <wj-flex-grid-column [header]="'Persona'" [binding]="'Persona'" width="2*"></wj-flex-grid-column>
+    <wj-flex-grid-column [header]="'Nombre'" [binding]="'Nombre'" width="2*"></wj-flex-grid-column>
+    <wj-flex-grid-column [header]="'Telefono'" [binding]="'Telefono'" width="2*"></wj-flex-grid-column>
+    <wj-flex-grid-filter></wj-flex-grid-filter>
+</wj-flex-grid>
+
+    <wj-popup #thePopup>
+        <div class="wj-dialog-header">
+            Deleting Row
+        </div>
+        <div class="wj-dialog-body" tabindex="-1">
+            Deseas eliminar registro seleccionado?
+        </div>
+        <div class="wj-dialog-footer">
+            <button class="btn btn-primary wj-hide-ok">Aceptar</button>
+            <button class="btn btn-default wj-hide">Cancelar</button>
+        </div>
+    </wj-popup>
+    <!--
+    <button (click)='mostrarData()' >DATA</button>-->
+</div>
+<div class="container-fluid">
+    <!-- Export button -->
+    <!--
+    <button style='border:1px solid black' class="btn btn-default" (click)="export()">Export</button>
+    -->
+</div>
+<!--
+-->
+<hr>
